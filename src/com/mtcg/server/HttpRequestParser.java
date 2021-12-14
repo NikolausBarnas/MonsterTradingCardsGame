@@ -1,29 +1,44 @@
 package com.mtcg.server;
 
+
+import com.mtcg.server.request.Body;
 import com.mtcg.server.request.Header;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.AbstractMap;
+
 
 public class HttpRequestParser {
     private final BufferedReader in;
-    public Hashtable<String,String> requestHeader;
-    private String body;
+    private AbstractMap<String,String> authToken;
+    private Header header;
+    private Body body;
 
     public HttpRequestParser(BufferedReader in) {
         this.in = in;
-        requestHeader = new Hashtable<>();
+        header = new Header();
+        body = new Body();
     }
 
     public void parseRequest() throws IOException {
-        String header = in.readLine();
-        while(header.length() > 0) {
-            appendHeaderParameter(header);
-            System.out.println(header);
-            header = in.readLine();
+        String line;
+        int lineCount = 0;
+        String[] tempLine;
+        while((line = in.readLine()).length() != 0) {
+            if (lineCount == 0) {
+                tempLine = line.split(" ");
+                header.setMethod(tempLine[0]);
+                header.setDirective(tempLine[1]);
+                System.out.println(tempLine[0]);
+                System.out.println(tempLine[1]);
+                lineCount = 1;
+            }
+            if (line.contains("Authorization")) {
+                tempLine = line.split(":");
+                header.setToken(tempLine[1].substring(1));
+                System.out.println(tempLine[1].substring(1));
+            }
         }
 
         StringBuilder bodyStringBuilder = new StringBuilder();
@@ -32,20 +47,10 @@ public class HttpRequestParser {
         }
         appendBody(bodyStringBuilder);
 
-        System.out.println(requestHeader.toString());
-    }
-
-
-    private void appendHeaderParameter(String header) {
-        int index = header.indexOf(":");
-        if (index == -1)
-            return;
-
-        requestHeader.put(header.substring(0,index), header.substring(index+1));
     }
 
     private void appendBody(StringBuilder bodyStringBuilder) {
-        body = bodyStringBuilder.toString();
+        body.setJsonString(bodyStringBuilder.toString());
     }
 
 

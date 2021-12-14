@@ -22,7 +22,6 @@ public class ClientHandler implements Runnable {
         try {
             HttpRequestParser httpRequestParser = new HttpRequestParser(in);
             httpRequestParser.parseRequest();
-            System.out.println(httpRequestParser.requestHeader.toString());
             //new RepositoryManager(httpRequestParser.getHeader(), httpRequestParser.getBody());
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,12 +6,18 @@ public class Header {
 
     private String method;
     private String directive;
-    private Optional<String> token;
+    private String token;
 
-    public Header(String method, String directive, Optional<String> token) {
-        this.method = method;
+
+    public void setDirective(String directive) {
         this.directive = directive;
-        if (token.isPresent())
-            this.token = token;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
