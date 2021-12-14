@@ -2,5 +2,8 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/com/mtcg/Main.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/card/CardDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/credentials/CredentialsDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/session/SessionDaoImpl.java" dialect="GenericSQL" />
   </component>
 </project>
