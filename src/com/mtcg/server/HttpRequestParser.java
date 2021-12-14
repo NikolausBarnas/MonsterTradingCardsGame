@@ -1,23 +1,17 @@
 package com.mtcg.server;
 
 
-import com.mtcg.server.httpRequest.Body;
-import com.mtcg.server.httpRequest.Header;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
 
-public class
-HttpRequestParser {
+public class HttpRequestParser {
     private final BufferedReader in;
-    private Header header;
-    private Body body;
+    private final HttpRequest httpRequest;
 
-    public HttpRequestParser(BufferedReader in) {
+    public HttpRequestParser(BufferedReader in, HttpRequest httpRequest) {
         this.in = in;
-        header = new Header();
-        body = new Body();
+        this.httpRequest = httpRequest;
     }
 
     public void parseRequest() throws IOException {
@@ -27,13 +21,13 @@ HttpRequestParser {
         while((line = in.readLine()).length() != 0) {
             if (lineCount == 0) {
                 tempLine = line.split(" ");
-                header.setMethod(tempLine[0]);
-                header.setDirective(tempLine[1]);
+                httpRequest.setMethod(tempLine[0]);
+                httpRequest.setDirective(tempLine[1]);
                 lineCount = 1;
             }
             if (line.contains("Authorization")) {
                 tempLine = line.split(":");
-                header.setToken(tempLine[1].substring(1));
+                httpRequest.setToken(tempLine[1].substring(1));
             }
         }
 
@@ -41,8 +35,11 @@ HttpRequestParser {
         while (in.ready()) {
             bodyStringBuilder.append((char) in.read());
         }
-        body.setJsonString(bodyStringBuilder.toString());
+        httpRequest.setBody(bodyStringBuilder.toString());
 
     }
 
+    public HttpRequest getHttpRequest() {
+        return httpRequest;
+    }
 }

@@ -20,11 +20,9 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
-            HttpRequestParser httpRequestParser = new HttpRequestParser(in);
-            httpRequestParser.parseRequest();
-            //new RepositoryManager(httpRequestParser.getHeader(), httpRequestParser.getBody());
-        } catch (IOException e) {
-            e.printStackTrace();
+            HttpRequest httpRequest = new HttpRequest(in);
+            RepositoryManager repositoryManager = new RepositoryManager();
+            repositoryManager.chooseDirective(httpRequest.getDirective());
         } finally {
             try {
                 in.close();

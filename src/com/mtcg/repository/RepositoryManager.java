@@ -14,7 +14,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class RepositoryManager {
-    private ArrayList<String> header;
+
+    public void chooseDirective(String method) {
+        switch()
+    }
+
+
+
+
+  /*  private ArrayList<String> header;
     private String body;
     private CredentialsRepositoryImpl credentialsRepository;
     private CardRepositoryImpl cardRepository;
@@ -94,6 +102,6 @@ public class RepositoryManager {
             break;
             default: break;
         }
-    }
+    }*/
 
 }

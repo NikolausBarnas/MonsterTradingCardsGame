@@ -1,10 +1,18 @@
-package com.mtcg.server.httpRequest;
+package com.mtcg.server;
 
-public class Header {
+import java.io.BufferedReader;
 
+public class HttpRequest {
     private String method;
     private String directive;
     private String token;
+    private String body;
+
+    private HttpRequestParser httpRequestParser;
+
+    public HttpRequest(BufferedReader in) {
+        this.httpRequestParser = new HttpRequestParser(in, this);
+    }
 
     public String getDirective() {
         return directive;
@@ -18,6 +26,10 @@ public class Header {
         return token;
     }
 
+    public String getBody() {
+        return body;
+    }
+
     public void setDirective(String directive) {
         this.directive = directive;
     }
@@ -29,4 +41,9 @@ public class Header {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
 }
