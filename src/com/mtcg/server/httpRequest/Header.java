@@ -1,6 +1,4 @@
-package com.mtcg.server.request;
-
-import java.util.Optional;
+package com.mtcg.server.httpRequest;
 
 public class Header {
 
@@ -8,6 +6,17 @@ public class Header {
     private String directive;
     private String token;
 
+    public String getDirective() {
+        return directive;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public String getToken() {
+        return token;
+    }
 
     public void setDirective(String directive) {
         this.directive = directive;
