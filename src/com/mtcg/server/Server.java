@@ -15,6 +15,7 @@ public class Server {
     private static ExecutorService pool = Executors.newFixedThreadPool(100);
 
     public Server() {
+
         try (ServerSocket listener = new ServerSocket(PORT)) {
             while (true) {
                 Socket client = listener.accept();

@@ -16,7 +16,10 @@ import java.util.Objects;
 public class RepositoryManager {
 
     public void chooseDirective(String method) {
-        switch()
+        switch(method) {
+            case "POST":
+                break;
+        }
     }
 
 
