@@ -10,9 +10,10 @@ import java.util.concurrent.Executors;
 
 public class Server {
     private final int PORT = 10001;
+    private static int POOL = 100;
 
     private ArrayList<ClientHandler> clients = new ArrayList<>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(100);
+    private static ExecutorService pool = Executors.newFixedThreadPool(POOL);
 
     public Server() {
 

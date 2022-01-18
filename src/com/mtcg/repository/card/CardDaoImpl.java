@@ -29,7 +29,7 @@ public class CardDaoImpl implements CardDao {
             VALUES (?,?,?,?,?)
             """);
             //WIESO FUNKTIONIERT card.id??????
-            preparedStatement.setString(1,card.id);
+            preparedStatement.setString(1,card.getId());
             preparedStatement.setString(2,card.getName());
             preparedStatement.setDouble(3,card.getDamage());
             preparedStatement.setString(4,card.elementType.toString());

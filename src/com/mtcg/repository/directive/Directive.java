@@ -1,8 +1,8 @@
 package com.mtcg.repository.directive;
 
 public interface Directive {
-    int handlePOST();
-    String handleGET();
-    int handlePUT();
-    int handleDELETE();
+    int handlePost(String body);
+    String handleGet(String body);
+    int handlePut(String body);
+    int handleDelete(String body);
 }

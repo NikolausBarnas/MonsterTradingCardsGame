@@ -1,7 +1,7 @@
 package com.mtcg.repository.directive;
 
 public class DirectiveHandler {
-    private String directive;
+    private String directive; 
 
     public DirectiveHandler(String directive) {
         this.directive = directive;
@@ -9,9 +9,10 @@ public class DirectiveHandler {
 
     public Object getDirectiveObject() {
         switch(directive) {
-            case "/users":;
+            case "/users": return new User();
             case "/sessions":;
             case "/packages":;
+            case "transactions/packages":;
             default:
                 System.out.println("get directive");
                 break;

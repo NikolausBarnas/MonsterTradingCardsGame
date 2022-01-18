@@ -1,24 +1,23 @@
 package com.mtcg.repository;
 
-import com.google.gson.Gson;
-import com.mtcg.hashing.Hash;
-import com.mtcg.repository.card.Card;
-import com.mtcg.repository.card.CardMediator;
-import com.mtcg.repository.card.CardRepositoryImpl;
-import com.mtcg.repository.session.SessionDaoImpl;
-import com.mtcg.repository.credentials.Credentials;
-import com.mtcg.repository.credentials.CredentialsRepositoryImpl;
+import com.mtcg.repository.directive.Directive;
+import com.mtcg.repository.directive.DirectiveHandler;
+import com.mtcg.server.HttpRequest;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Objects;
+public class RequestHandler {
 
-public class RepositoryManager {
+
+    public void handleRequest(HttpRequest req) {
+        DirectiveHandler dirHandler = new DirectiveHandler(req.getDirective());
+        Directive directive = dirHandler.getDirectiveObject();
+    }
 
     public void chooseDirective(String method) {
         switch(method) {
-            case "POST":
-                break;
+            case "POST" ->
+            case "GET": ->
+            case "PUT": ->
+            case "DELETE": ->
         }
     }
 
