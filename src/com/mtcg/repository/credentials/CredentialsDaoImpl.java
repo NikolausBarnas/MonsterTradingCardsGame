@@ -11,18 +11,10 @@ import java.util.Optional;
 
 public class CredentialsDaoImpl implements CredentialsDao {
     private Connection connection;
-    private static CredentialsDaoImpl instance = null;
-    private static PreparedStatement preparedStatement;
+    private  PreparedStatement preparedStatement;
 
-    static {
-        CredentialsDaoImpl.instance = new CredentialsDaoImpl();
-    }
-
-    private CredentialsDaoImpl() {
+    public CredentialsDaoImpl() {
         connection = DBConnection.getInstance().getConnection();
-    }
-    public static CredentialsDaoImpl getInstance() {
-        return instance;
     }
 
     @Override

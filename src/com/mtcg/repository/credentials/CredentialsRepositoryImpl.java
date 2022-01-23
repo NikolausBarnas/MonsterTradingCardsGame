@@ -7,14 +7,9 @@ import java.util.Optional;
 
 public class CredentialsRepositoryImpl implements RepositoryDao<Credentials> {
     private final CredentialsDaoImpl credentialsDaoImpl;
-    private static CredentialsRepositoryImpl instance = null;
 
-    static {
-        CredentialsRepositoryImpl.instance = new CredentialsRepositoryImpl();
-    }
-
-    private CredentialsRepositoryImpl() {
-        credentialsDaoImpl = CredentialsDaoImpl.getInstance();
+    public CredentialsRepositoryImpl() {
+        credentialsDaoImpl = new CredentialsDaoImpl();
     }
 
     @Override
@@ -25,8 +20,5 @@ public class CredentialsRepositoryImpl implements RepositoryDao<Credentials> {
     @Override
     public Optional<Credentials> get(Credentials credentials) throws SQLException {
         return credentialsDaoImpl.read(credentials);
-    }
-    public static CredentialsRepositoryImpl getInstance() {
-        return instance;
     }
 }

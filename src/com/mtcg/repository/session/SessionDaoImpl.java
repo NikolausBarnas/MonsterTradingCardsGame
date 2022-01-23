@@ -10,17 +10,10 @@ import java.sql.SQLException;
 
 public class SessionDaoImpl implements SessionDao {
 
-    private static SessionDaoImpl instance = null;
     private Connection connection;
 
-    private SessionDaoImpl() {
+    public SessionDaoImpl() {
         connection = DBConnection.getInstance().getConnection();
-    }
-    static {
-        SessionDaoImpl.instance = new SessionDaoImpl();
-    }
-    public static SessionDaoImpl getInstance() {
-        return instance;
     }
 
     @Override

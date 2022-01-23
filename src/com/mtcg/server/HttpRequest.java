@@ -1,6 +1,7 @@
 package com.mtcg.server;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public class HttpRequest {
     private String method;
@@ -10,8 +11,9 @@ public class HttpRequest {
 
     private HttpRequestParser httpRequestParser;
 
-    public HttpRequest(BufferedReader in) {
+    public HttpRequest(BufferedReader in) throws IOException {
         this.httpRequestParser = new HttpRequestParser(in, this);
+        httpRequestParser.parseRequest();
     }
 
     public String getDirective() {

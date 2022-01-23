@@ -1,7 +1,9 @@
 package com.mtcg.repository.directive;
 
-public interface Directive {
-    int handlePost(String body);
+import java.sql.SQLException;
+
+public interface DirectiveDAOHandler {
+    int handlePost(String body) throws SQLException;
     String handleGet(String body);
     int handlePut(String body);
     int handleDelete(String body);

@@ -10,7 +10,7 @@ public class CardMediator {
     @SerializedName("Damage")
     private double damage;
 
-    CardMediator(String id, String name, double damage) {
+    public CardMediator(String id, String name, double damage) {
         this.id = id;
         this.name = name;
         this.damage = damage;

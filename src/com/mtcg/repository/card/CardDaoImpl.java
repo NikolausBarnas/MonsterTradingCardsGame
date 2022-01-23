@@ -10,17 +10,11 @@ import java.util.Optional;
 
 public class CardDaoImpl implements CardDao {
     private Connection connection;
-    private static CardDaoImpl instance = null;
     private static PreparedStatement preparedStatement;
 
-    static {
-        CardDaoImpl.instance = new CardDaoImpl();
-    }
-    private CardDaoImpl() {
+    public CardDaoImpl() {
         connection = DBConnection.getInstance().getConnection();
     }
-    public static CardDaoImpl getInstance() { return instance; }
-
     @Override
     public void create(Card card) throws SQLException {
         try {
