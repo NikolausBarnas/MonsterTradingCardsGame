@@ -1380,8 +1380,8 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <IntrospectionStateNumber>1566</IntrospectionStateNumber>
-      <StartupTime>1642925025</StartupTime>
+      <IntrospectionStateNumber>2244</IntrospectionStateNumber>
+      <StartupTime>1643009694</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13757</ObjectId>
@@ -1411,9 +1411,9 @@ false posixrules
 13391||-9223372036854775808|U|G
 13391||10|U|G</Grants>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>1567</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2245</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|32792|32782|7
+      <Relations>sequence|table|40972|32782|7
 </Relations>
     </database>
     <role id="4" parent="1" name="pg_database_owner">
@@ -1487,7 +1487,7 @@ false posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>527</StateNumber>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>1567</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2245</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="21" parent="3" name="plpgsql">
@@ -1589,15 +1589,15 @@ false posixrules
       <HandlerId>334</HandlerId>
     </access-method>
     <sequence id="33" parent="20" name="packages_packageID_seq">
-      <ObjectId>32792</ObjectId>
+      <ObjectId>40972</ObjectId>
       <Owner>swe1user</Owner>
-      <StateNumber>1486</StateNumber>
+      <StateNumber>1589</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="34" parent="20" name="cards">
       <ObjectId>24587</ObjectId>
       <Owner>swe1user</Owner>
-      <StateNumber>1047</StateNumber>
+      <StateNumber>2024</StateNumber>
       <AccessMethodId>2</AccessMethodId>
     </table>
     <table id="35" parent="20" name="packages">
@@ -1653,7 +1653,26 @@ false posixrules
       <StateNumber>1047</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="43" parent="34" name="cards_id_uindex">
+    <column id="43" parent="34" name="package_id">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1573</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="44" parent="34" name="owner">
+      <Position>7</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>1580</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="45" parent="34" name="isindeck">
+      <Position>8</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>2242</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="46" parent="34" name="cards_id_uindex">
       <ObjectId>24592</ObjectId>
       <StateNumber>1037</StateNumber>
       <ColNames>id</ColNames>
@@ -1663,115 +1682,106 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <column id="44" parent="35" name="cardID_1">
+    <column id="47" parent="35" name="card1">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1476</StateNumber>
+      <StateNumber>1615</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="45" parent="35" name="cardID_2">
+    <column id="48" parent="35" name="card2">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1476</StateNumber>
+      <StateNumber>1619</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="46" parent="35" name="cardID_3">
+    <column id="49" parent="35" name="card3">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1476</StateNumber>
+      <StateNumber>1620</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="47" parent="35" name="cardID_4">
+    <column id="50" parent="35" name="card4">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1476</StateNumber>
+      <StateNumber>1621</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="48" parent="35" name="cardID_5">
+    <column id="51" parent="35" name="card5">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1476</StateNumber>
+      <StateNumber>1622</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="49" parent="35" name="packageID">
+    <column id="52" parent="35" name="id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1486</StateNumber>
+      <StateNumber>1637</StateNumber>
       <DefaultExpression>nextval(&apos;&quot;packages_packageID_seq&quot;&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="50" parent="35" name="packages_cardid_1_uindex">
+    <index id="53" parent="35" name="packages_cardid_1_uindex">
       <ObjectId>32787</ObjectId>
       <StateNumber>1486</StateNumber>
-      <ColNames>cardID_1</ColNames>
+      <ColNames>card1</ColNames>
       <Unique>1</Unique>
       <CollationIds>100</CollationIds>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="51" parent="35" name="packages_cardid_2_uindex">
+    <index id="54" parent="35" name="packages_cardid_2_uindex">
       <ObjectId>32788</ObjectId>
       <StateNumber>1486</StateNumber>
-      <ColNames>cardID_2</ColNames>
+      <ColNames>card2</ColNames>
       <Unique>1</Unique>
       <CollationIds>100</CollationIds>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="52" parent="35" name="packages_cardid_3_uindex">
+    <index id="55" parent="35" name="packages_cardid_3_uindex">
       <ObjectId>32789</ObjectId>
       <StateNumber>1486</StateNumber>
-      <ColNames>cardID_3</ColNames>
+      <ColNames>card3</ColNames>
       <Unique>1</Unique>
       <CollationIds>100</CollationIds>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="53" parent="35" name="packages_cardid_4_uindex">
+    <index id="56" parent="35" name="packages_cardid_4_uindex">
       <ObjectId>32790</ObjectId>
       <StateNumber>1486</StateNumber>
-      <ColNames>cardID_4</ColNames>
+      <ColNames>card4</ColNames>
       <Unique>1</Unique>
       <CollationIds>100</CollationIds>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="54" parent="35" name="packages_cardid_5_uindex">
+    <index id="57" parent="35" name="packages_cardid_5_uindex">
       <ObjectId>32791</ObjectId>
       <StateNumber>1486</StateNumber>
-      <ColNames>cardID_5</ColNames>
+      <ColNames>card5</ColNames>
       <Unique>1</Unique>
       <CollationIds>100</CollationIds>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="55" parent="35" name="packages_packageid_uindex">
-      <ObjectId>32804</ObjectId>
-      <StateNumber>1487</StateNumber>
-      <ColNames>packageID</ColNames>
-      <Unique>1</Unique>
-      <CollationIds>0</CollationIds>
-      <ClassIds>1978</ClassIds>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <column id="56" parent="36" name="username">
+    <column id="58" parent="36" name="username">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>886</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="57" parent="36" name="sessions_username_uindex">
+    <index id="59" parent="36" name="sessions_username_uindex">
       <ObjectId>16407</ObjectId>
       <StateNumber>887</StateNumber>
       <ColNames>username</ColNames>
@@ -1781,19 +1791,19 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <column id="58" parent="37" name="username">
+    <column id="60" parent="37" name="username">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>764</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="59" parent="37" name="password">
+    <column id="61" parent="37" name="password">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>764</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="60" parent="37" name="coins">
+    <column id="62" parent="37" name="coins">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1801,7 +1811,7 @@ false posixrules
       <DefaultExpression>20</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="61" parent="37" name="users_username_uindex">
+    <index id="63" parent="37" name="users_username_uindex">
       <ObjectId>16401</ObjectId>
       <StateNumber>837</StateNumber>
       <ColNames>username</ColNames>

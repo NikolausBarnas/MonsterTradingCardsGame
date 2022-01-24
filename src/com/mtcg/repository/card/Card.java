@@ -11,6 +11,7 @@ public abstract class Card {
     protected final double damage;
     protected ElementType elementType;
     protected CardType cardType;
+    protected int packageID;
 
     Card(String id, String name, double damage, ElementType elementType, CardType cardType) {
         this.id = id;
@@ -38,5 +39,9 @@ public abstract class Card {
 
     public ElementType getElementType() {
         return elementType;
+    }
+
+    public void setPackageID(int packageID) {
+        this.packageID = packageID;
     }
 }

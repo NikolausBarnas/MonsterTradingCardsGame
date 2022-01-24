@@ -27,7 +27,9 @@ public class HttpRequestParser {
             }
             if (line.contains("Authorization")) {
                 tempLine = line.split(":");
-                httpRequest.setToken(tempLine[1].substring(1));
+                tempLine = tempLine[1].split(" ");
+                tempLine = tempLine[2].split("-");
+                httpRequest.setToken(tempLine[0]);
             }
         }
 

@@ -11,9 +11,18 @@ import java.sql.SQLException;
 public class SessionDaoImpl implements SessionDao {
 
     private Connection connection;
+    private static SessionDaoImpl instance = null;
 
-    public SessionDaoImpl() {
+    static {
+        SessionDaoImpl.instance = new SessionDaoImpl();
+    }
+
+    private SessionDaoImpl() {
         connection = DBConnection.getInstance().getConnection();
+    }
+
+    public static SessionDaoImpl getInstance() {
+        return instance;
     }
 
     @Override
@@ -31,14 +40,14 @@ public class SessionDaoImpl implements SessionDao {
     }
 
     @Override
-    public String getSession(Credentials credentials) {
+    public String getSession(String username) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("""
             SELECT username 
             FROM sessions
             WHERE username = ?
         """);
-            preparedStatement.setString(1, credentials.getUsername());
+            preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString(1);
