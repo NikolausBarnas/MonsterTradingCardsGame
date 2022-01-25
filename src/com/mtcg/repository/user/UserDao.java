@@ -1,14 +1,17 @@
 package com.mtcg.repository.user;
 
 import com.mtcg.database.DBConnection;
+import com.mtcg.repository.card.CardMediator;
 import com.mtcg.repository.credentials.Credentials;
 import com.mtcg.repository.credentials.CredentialsDaoImpl;
+import com.mtcg.repository.scoreboard.ScoreboardEntry;
 import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class UserDao {
@@ -16,9 +19,10 @@ public class UserDao {
     private static UserDao instance = null;
     PreparedStatement selectCoins = null;
     PreparedStatement updateCoins = null;
-    PreparedStatement insert = null;
-    PreparedStatement delete = null;
-    PreparedStatement update = null;
+    PreparedStatement getUserData = null;
+    PreparedStatement updateUserData = null;
+    PreparedStatement getElo = null;
+    PreparedStatement getScoreboard = null;
 
     static {
         UserDao.instance = new UserDao();
@@ -57,7 +61,7 @@ public class UserDao {
         return -1;
     }
 
-    public boolean updateCoins(String username, int coins) {
+    public int updateCoins(String username, int coins) {
         if (updateCoins == null) {
             try {
                 updateCoins = connection.prepareStatement("""
@@ -72,11 +76,113 @@ public class UserDao {
         try {
             updateCoins.setInt(1, coins);
             updateCoins.setString(2, username);
-            return updateCoins.execute();
+            return updateCoins.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
+
+    public UserMediator getUserData(String username) {
+        if (getUserData == null) {
+            try {
+                getUserData = connection.prepareStatement("""
+                    SELECT name,bio,image
+                    FROM users
+                    WHERE username = ?
+                """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            getUserData.setString(1, username);
+            ResultSet resultSet = getUserData.executeQuery();
+            if (resultSet.next())
+                return new UserMediator(resultSet.getString("name"), resultSet.getString("bio"),
+                        resultSet.getString("image"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int updateUserData(String username, UserMediator userMediator) {
+        if (updateUserData == null) {
+            try {
+                updateUserData = connection.prepareStatement("""
+                    UPDATE users 
+                    SET name = ?, bio = ?, image = ?
+                    WHERE username = ?
+                """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            updateUserData.setString(1, userMediator.getName());
+            updateUserData.setString(2, userMediator.getBio());
+            updateUserData.setString(3, userMediator.getImage());
+            updateUserData.setString(4, username);
+            return updateUserData.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int getElo(String username) {
+        if (getElo == null) {
+            try {
+                getElo = connection.prepareStatement("""
+                    SELECT elo
+                    FROM users 
+                    WHERE username = ?;
+                """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            getElo.setString(1, username);
+            ResultSet resultSet = getElo.executeQuery();
+            if (resultSet.next())
+                return resultSet.getInt("elo");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public ArrayList<ScoreboardEntry> getScoreboard() {
+        ArrayList<ScoreboardEntry> scoreboardEntries = new ArrayList<>();
+        int rank = 1;
+        if (getScoreboard == null) {
+            try {
+                getScoreboard = connection.prepareStatement("""
+                    SELECT username,elo
+                    FROM users
+                    ORDER BY elo
+                    DESC
+                """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            ResultSet resultSet = getScoreboard.executeQuery();
+            while (resultSet.next()) {
+                scoreboardEntries.add(new ScoreboardEntry(rank, resultSet.getString("username"),
+                        resultSet.getInt("elo")));
+                rank++;
+            }
+            if (!scoreboardEntries.isEmpty())
+                return scoreboardEntries;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
 

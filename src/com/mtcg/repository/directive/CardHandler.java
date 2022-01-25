@@ -10,7 +10,6 @@ import com.mtcg.repository.packages.PackageDao;
 import com.mtcg.server.Response;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CardHandler implements DirectiveDAOHandler {
@@ -20,13 +19,14 @@ public class CardHandler implements DirectiveDAOHandler {
     private PackageDao packageDao = null;
     private ArrayList<Card> cardPackage = new ArrayList<>();
     private Package p = null;
+    private String token;
 
-    public CardHandler() {
+    public CardHandler(String token) {
         this.gson = new Gson();
         this.cardDao = CardDao.getInstance();
         this.packageDao = PackageDao.getInstance();
+        this.token = token;
     }
-
 
     @Override
     public Response handlePost(String body) {
@@ -38,18 +38,25 @@ public class CardHandler implements DirectiveDAOHandler {
                 cardPackage.get(3).getId(),cardPackage.get(4).getId());
 
         int packageID = packageDao.create(p);
+        if (packageID == -1)
+            return new Response(500, "");
 
         for (Card c: cardPackage) {
             c.setPackageID(packageID);
-            cardDao.create(c);
+            if (cardDao.create(c) == -1) {
+                return new Response(500, "");
+            }
         }
-
         return new Response(200, "");
     }
 
     @Override
     public Response handleGet(String username) {
-        return new Response(404, gson.toJson(cardDao.getAll(username).toArray(),CardMediator[].class));
+        ArrayList<CardMediator> cards = cardDao.getAll(token);
+        if (cards.isEmpty())
+            return new Response(409, "");
+
+        return new Response(200, gson.toJson(cards.toArray(),CardMediator[].class));
     }
 
     @Override

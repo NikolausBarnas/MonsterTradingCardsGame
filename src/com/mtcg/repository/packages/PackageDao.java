@@ -43,9 +43,9 @@ public class PackageDao {
             }
 
         } catch(SQLException e) {
-            e.printStackTrace();
+            return -1;
         }
-        return 200;
+        return -1;
     }
 
     public Optional<Package> read() {

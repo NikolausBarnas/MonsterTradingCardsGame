@@ -11,9 +11,6 @@ public class TransactionDao {
 
     private Connection connection;
     private static TransactionDao instance = null;
-    PreparedStatement select = null;
-    PreparedStatement insert = null;
-    PreparedStatement delete = null;
     PreparedStatement update = null;
 
     static {
@@ -23,9 +20,6 @@ public class TransactionDao {
     private TransactionDao() { connection = DBConnection.getInstance().getConnection();
     }
     public static TransactionDao getInstance() { return instance; }
-    public int create(String s) {
-        return 200;
-    }
 
     public Optional<String> read(String s) {
         return Optional.empty();
@@ -46,12 +40,12 @@ public class TransactionDao {
         try {
             update.setString(1,owner);
             update.setString(2,s);
-            update.execute();
+            return update.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return 200;
+        return -1;
     }
 
 }

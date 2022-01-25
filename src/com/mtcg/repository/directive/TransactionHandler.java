@@ -40,11 +40,13 @@ public class TransactionHandler implements DirectiveDAOHandler {
             return new Response(409, "");
 
         Optional<Package> buyingPackage = packageDao.read();
+        if (!buyingPackage.isPresent())
+            return new Response(500,"");
         packageDao.delete(p);
         for (int i = 0; i < buyingPackage.get().getCards().size(); i++) {
             transactionDao.update(buyingPackage.get().getCards().get(i), token);
         }
-        if (!userDao.updateCoins(token, coins-5)) {
+        if (userDao.updateCoins(token, coins-5) == -1) {
             return new Response(500,"");
         }
 

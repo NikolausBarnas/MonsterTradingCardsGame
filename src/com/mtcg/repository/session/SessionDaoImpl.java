@@ -26,17 +26,18 @@ public class SessionDaoImpl implements SessionDao {
     }
 
     @Override
-    public void createSession (Credentials credentials) {
+    public boolean createSession (Credentials credentials) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("""
             INSERT INTO sessions (username)
             VALUES (?)
         """);
             preparedStatement.setString(1, credentials.getUsername());
-            preparedStatement.execute();
+            return preparedStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
     }
 
     @Override

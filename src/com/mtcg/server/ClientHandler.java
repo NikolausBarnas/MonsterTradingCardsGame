@@ -23,6 +23,8 @@ public class ClientHandler implements Runnable {
             HttpRequest httpRequest = new HttpRequest(in);
             RequestHandler requestHandler = new RequestHandler();
             ResponseHandler r = new ResponseHandler(requestHandler.handleRequest(httpRequest),out);
+            r.createResponse();
+            r.sendResponse();
         } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
         } finally {

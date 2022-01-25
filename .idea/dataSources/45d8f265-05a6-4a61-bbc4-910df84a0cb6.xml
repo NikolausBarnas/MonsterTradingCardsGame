@@ -1380,8 +1380,8 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <IntrospectionStateNumber>2244</IntrospectionStateNumber>
-      <StartupTime>1643009694</StartupTime>
+      <IntrospectionStateNumber>2441</IntrospectionStateNumber>
+      <StartupTime>1643105131</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13757</ObjectId>
@@ -1411,7 +1411,7 @@ false posixrules
 13391||-9223372036854775808|U|G
 13391||10|U|G</Grants>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>2245</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2442</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|40972|32782|7
 </Relations>
@@ -1487,7 +1487,7 @@ false posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>527</StateNumber>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>2245</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2442</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="21" parent="3" name="plpgsql">
@@ -1597,7 +1597,7 @@ false posixrules
     <table id="34" parent="20" name="cards">
       <ObjectId>24587</ObjectId>
       <Owner>swe1user</Owner>
-      <StateNumber>2024</StateNumber>
+      <StateNumber>2428</StateNumber>
       <AccessMethodId>2</AccessMethodId>
     </table>
     <table id="35" parent="20" name="packages">
@@ -1612,67 +1612,73 @@ false posixrules
       <StateNumber>886</StateNumber>
       <AccessMethodId>2</AccessMethodId>
     </table>
-    <table id="37" parent="20" name="users">
-      <ObjectId>16395</ObjectId>
+    <table id="37" parent="20" name="trading">
+      <ObjectId>49172</ObjectId>
       <Owner>swe1user</Owner>
-      <StateNumber>1560</StateNumber>
+      <StateNumber>2439</StateNumber>
       <AccessMethodId>2</AccessMethodId>
     </table>
-    <column id="38" parent="34" name="id">
+    <table id="38" parent="20" name="users">
+      <ObjectId>16395</ObjectId>
+      <Owner>swe1user</Owner>
+      <StateNumber>2428</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+    </table>
+    <column id="39" parent="34" name="id">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1036</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="39" parent="34" name="name">
+    <column id="40" parent="34" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1041</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="40" parent="34" name="damage">
+    <column id="41" parent="34" name="damage">
       <Position>3</Position>
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1045</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="41" parent="34" name="element">
+    <column id="42" parent="34" name="element">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1046</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="42" parent="34" name="cardtype">
+    <column id="43" parent="34" name="cardtype">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1047</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="43" parent="34" name="package_id">
+    <column id="44" parent="34" name="package_id">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1573</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="44" parent="34" name="owner">
+    <column id="45" parent="34" name="owner">
       <Position>7</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>1580</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="45" parent="34" name="isindeck">
+    <column id="46" parent="34" name="isindeck">
       <Position>8</Position>
       <DataType>boolean|0s</DataType>
       <StateNumber>2242</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <index id="46" parent="34" name="cards_id_uindex">
+    <index id="47" parent="34" name="cards_id_uindex">
       <ObjectId>24592</ObjectId>
       <StateNumber>1037</StateNumber>
       <ColNames>id</ColNames>
@@ -1682,42 +1688,51 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <column id="47" parent="35" name="card1">
+    <foreign-key id="48" parent="34" name="cards_users_username_fk">
+      <ObjectId>49167</ObjectId>
+      <StateNumber>2428</StateNumber>
+      <ColNames>owner</ColNames>
+      <RefTableId>16395</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefColNames>username</RefColNames>
+    </foreign-key>
+    <column id="49" parent="35" name="card1">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1615</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="48" parent="35" name="card2">
+    <column id="50" parent="35" name="card2">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1619</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="49" parent="35" name="card3">
+    <column id="51" parent="35" name="card3">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1620</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="50" parent="35" name="card4">
+    <column id="52" parent="35" name="card4">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1621</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="51" parent="35" name="card5">
+    <column id="53" parent="35" name="card5">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1622</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="52" parent="35" name="id">
+    <column id="54" parent="35" name="id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1725,7 +1740,7 @@ false posixrules
       <DefaultExpression>nextval(&apos;&quot;packages_packageID_seq&quot;&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="53" parent="35" name="packages_cardid_1_uindex">
+    <index id="55" parent="35" name="packages_cardid_1_uindex">
       <ObjectId>32787</ObjectId>
       <StateNumber>1486</StateNumber>
       <ColNames>card1</ColNames>
@@ -1735,7 +1750,7 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="54" parent="35" name="packages_cardid_2_uindex">
+    <index id="56" parent="35" name="packages_cardid_2_uindex">
       <ObjectId>32788</ObjectId>
       <StateNumber>1486</StateNumber>
       <ColNames>card2</ColNames>
@@ -1745,7 +1760,7 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="55" parent="35" name="packages_cardid_3_uindex">
+    <index id="57" parent="35" name="packages_cardid_3_uindex">
       <ObjectId>32789</ObjectId>
       <StateNumber>1486</StateNumber>
       <ColNames>card3</ColNames>
@@ -1755,7 +1770,7 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="56" parent="35" name="packages_cardid_4_uindex">
+    <index id="58" parent="35" name="packages_cardid_4_uindex">
       <ObjectId>32790</ObjectId>
       <StateNumber>1486</StateNumber>
       <ColNames>card4</ColNames>
@@ -1765,7 +1780,7 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="57" parent="35" name="packages_cardid_5_uindex">
+    <index id="59" parent="35" name="packages_cardid_5_uindex">
       <ObjectId>32791</ObjectId>
       <StateNumber>1486</StateNumber>
       <ColNames>card5</ColNames>
@@ -1775,13 +1790,13 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <column id="58" parent="36" name="username">
+    <column id="60" parent="36" name="username">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>886</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="59" parent="36" name="sessions_username_uindex">
+    <index id="61" parent="36" name="sessions_username_uindex">
       <ObjectId>16407</ObjectId>
       <StateNumber>887</StateNumber>
       <ColNames>username</ColNames>
@@ -1791,19 +1806,72 @@ false posixrules
       <ClassIds>3126</ClassIds>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <column id="60" parent="37" name="username">
+    <column id="62" parent="37" name="id">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2439</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="63" parent="37" name="cardToTrade">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2439</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="64" parent="37" name="cardtype">
+      <Position>3</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2439</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="65" parent="37" name="minimumdamage">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2439</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="66" parent="37" name="offeror">
+      <Position>5</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2439</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="67" parent="37" name="trading_pk">
+      <ObjectId>49177</ObjectId>
+      <StateNumber>2439</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <CollationIds>100</CollationIds>
+      <CollationNames>default</CollationNames>
+      <ClassIds>3126</ClassIds>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="68" parent="37" name="trading_pk">
+      <ObjectId>49178</ObjectId>
+      <StateNumber>2439</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>trading_pk</UnderlyingIndexName>
+    </key>
+    <column id="69" parent="38" name="username">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>764</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="61" parent="37" name="password">
+    <column id="70" parent="38" name="password">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>764</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="62" parent="37" name="coins">
+    <column id="71" parent="38" name="coins">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1811,7 +1879,35 @@ false posixrules
       <DefaultExpression>20</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="63" parent="37" name="users_username_uindex">
+    <column id="72" parent="38" name="bio">
+      <Position>4</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>2271</StateNumber>
+      <DefaultExpression>&apos;defaultBio&apos;::character varying</DefaultExpression>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="73" parent="38" name="image">
+      <Position>5</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>2272</StateNumber>
+      <DefaultExpression>&apos;defaultImage&apos;::character varying</DefaultExpression>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="74" parent="38" name="elo">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>2259</StateNumber>
+      <DefaultExpression>100</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="75" parent="38" name="name">
+      <Position>7</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>2273</StateNumber>
+      <DefaultExpression>&apos;defaultName&apos;::character varying</DefaultExpression>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="76" parent="38" name="users_username_uindex">
       <ObjectId>16401</ObjectId>
       <StateNumber>837</StateNumber>
       <ColNames>username</ColNames>

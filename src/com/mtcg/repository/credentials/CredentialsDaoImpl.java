@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class CredentialsDaoImpl implements CredentialsDao {
+public class CredentialsDaoImpl {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private static CredentialsDaoImpl instance = null;
@@ -26,8 +26,7 @@ public class CredentialsDaoImpl implements CredentialsDao {
         return instance;
     }
 
-    @Override
-    public void create(Credentials credentials) throws SQLException {
+    public int create(Credentials credentials) throws SQLException {
         try {
             preparedStatement = connection.prepareStatement("""
             INSERT INTO users(username, password)
@@ -35,13 +34,13 @@ public class CredentialsDaoImpl implements CredentialsDao {
             """);
             preparedStatement.setString(1, credentials.getUsername());
             preparedStatement.setString(2, credentials.getHashPassword());
-            preparedStatement.execute();
+            return preparedStatement.executeUpdate();
         } catch (PSQLException p) {
 
         }
+        return -1;
     }
 
-    @Override
     public Optional<Credentials> read(Credentials credentials) throws SQLException {
         try {
             preparedStatement = connection.prepareStatement("""

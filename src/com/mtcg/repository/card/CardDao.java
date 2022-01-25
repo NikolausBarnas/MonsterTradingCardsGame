@@ -10,10 +10,11 @@ import java.util.Optional;
 public class CardDao {
     private Connection connection;
     private static CardDao instance = null;
-    PreparedStatement select = null;
+    PreparedStatement selectOwner = null;
     PreparedStatement insert = null;
     PreparedStatement updateDeck = null;
     PreparedStatement selectAll = null;
+    PreparedStatement selectDeckPlain = null;
     PreparedStatement selectDeck = null;
 
     static {
@@ -24,7 +25,7 @@ public class CardDao {
     }
     public static CardDao getInstance() { return instance; }
 
-    public void create(Card card) {
+    public int create(Card card) {
 
         if (insert == null) {
 
@@ -44,23 +45,35 @@ public class CardDao {
             insert.setString(4,card.elementType.toString());
             insert.setString(5,card.cardType.toString());
             insert.setInt(6,card.packageID);
-            insert.execute();
+            return insert.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1;
     }
 
-    public Optional<Card> read(String username) {
-        if (select == null) {
+    public String getOwner(String cardID) {
+        if (selectOwner == null) {
             try {
-                select = connection.prepareStatement("""
-          
+                selectOwner = connection.prepareStatement("""
+                SELECT owner 
+                FROM cards
+                WHERE id = ?
             """);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return Optional.empty();
+        try {
+            selectOwner.setString(1, cardID);
+            ResultSet resultSet = selectOwner.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("owner");
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public ArrayList<CardMediator> getAll(String username) {
@@ -85,16 +98,15 @@ public class CardDao {
             }
             return cards;
         } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
-    public ArrayList<String> getDeck (String owner) {
+    public ArrayList<String> getDeckPlain (String owner) {
         ArrayList<String> deck = new ArrayList<>();
-        if (selectDeck == null) {
+        if (selectDeckPlain == null) {
             try {
-                selectDeck = connection.prepareStatement("""
+                selectDeckPlain = connection.prepareStatement("""
                 SELECT id FROM cards
                 WHERE owner = ?
                 AND isInDeck = TRUE
@@ -104,8 +116,8 @@ public class CardDao {
             }
         }
         try {
-            selectDeck.setString(1, owner);
-            ResultSet resultSet = selectAll.executeQuery();
+            selectDeckPlain.setString(1, owner);
+            ResultSet resultSet = selectDeckPlain.executeQuery();
             while (resultSet.next()) {
                 deck.add(resultSet.getString("id"));
             }
@@ -138,6 +150,34 @@ public class CardDao {
             e.printStackTrace();
         }
         return 200;
+    }
+
+    public ArrayList<CardMediator> getDeck (String owner) {
+        ArrayList<CardMediator> deck = new ArrayList<>();
+        if (selectDeck == null) {
+            try {
+                selectDeck = connection.prepareStatement("""
+                SELECT id, name, damage
+                FROM cards
+                WHERE owner = ?
+                AND isindeck = true
+            """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            selectDeck.setString(1, owner);
+            ResultSet resultSet = selectDeck.executeQuery();
+            while (resultSet.next()) {
+                deck.add(new CardMediator(resultSet.getString("id"), resultSet.getString("name"),
+                        resultSet.getInt("damage")));
+            }
+            return deck;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
