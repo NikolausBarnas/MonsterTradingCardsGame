@@ -35,4 +35,16 @@ public class CardMediator {
         }
         return card;
     }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

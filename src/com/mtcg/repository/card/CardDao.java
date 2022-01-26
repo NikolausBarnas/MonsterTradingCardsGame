@@ -16,6 +16,8 @@ public class CardDao {
     PreparedStatement selectAll = null;
     PreparedStatement selectDeckPlain = null;
     PreparedStatement selectDeck = null;
+    PreparedStatement selectCard = null;
+    PreparedStatement selectCardInDeck = null;
 
     static {
         CardDao.instance = new CardDao();
@@ -24,6 +26,55 @@ public class CardDao {
         connection = DBConnection.getInstance().getConnection();
     }
     public static CardDao getInstance() { return instance; }
+
+    public CardMediator selectCard (String cardID) {
+        if (selectCard == null) {
+            try {
+                selectCard = connection.prepareStatement("""
+                SELECT id, name, damage
+                FROM cards
+                WHERE id = ?
+            """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            selectCard.setString(1, cardID);
+            ResultSet resultSet = selectCard.executeQuery();
+            if (resultSet.next()) {
+                return new CardMediator(resultSet.getString("id"), resultSet.getString("name"),
+                        resultSet.getInt("damage"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean isInDeck (String cardID) {
+        if (selectCardInDeck == null) {
+            try {
+                selectCardInDeck = connection.prepareStatement("""
+                SELECT isindeck
+                FROM cards
+                WHERE id = ?
+            """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            selectCardInDeck.setString(1, cardID);
+            ResultSet resultSet = selectCardInDeck.executeQuery();
+            if (resultSet.next())
+                return resultSet.getBoolean("isindeck");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public int create(Card card) {
 

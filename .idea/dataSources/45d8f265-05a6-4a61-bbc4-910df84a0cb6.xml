@@ -1380,7 +1380,7 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <IntrospectionStateNumber>2441</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2445</IntrospectionStateNumber>
       <StartupTime>1643105131</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
@@ -1411,7 +1411,7 @@ false posixrules
 13391||-9223372036854775808|U|G
 13391||10|U|G</Grants>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>2442</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2446</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|40972|32782|7
 </Relations>
@@ -1487,7 +1487,7 @@ false posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>527</StateNumber>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>2442</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2446</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="21" parent="3" name="plpgsql">
@@ -1813,11 +1813,11 @@ false posixrules
       <StateNumber>2439</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="63" parent="37" name="cardToTrade">
+    <column id="63" parent="37" name="cardtotrade">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2439</StateNumber>
+      <StateNumber>2443</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="64" parent="37" name="cardtype">
