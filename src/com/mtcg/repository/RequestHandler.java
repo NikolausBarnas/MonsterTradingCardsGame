@@ -1,28 +1,35 @@
 package com.mtcg.repository;
 
-import com.mtcg.repository.credentials.Credentials;
 import com.mtcg.repository.directive.DirectiveDAOHandler;
 import com.mtcg.repository.directive.DirectiveHandler;
-import com.mtcg.repository.session.SessionDaoImpl;
+import com.mtcg.repository.game.BattleExchange;
+import com.mtcg.repository.session.SessionDao;
 import com.mtcg.server.HttpRequest;
 import com.mtcg.server.Response;
 
 import java.sql.SQLException;
+import java.util.concurrent.SynchronousQueue;
 
 public class RequestHandler {
 
-    DirectiveDAOHandler directiveDAOHandler;
+    private DirectiveDAOHandler directiveDAOHandler;
+
+    private SynchronousQueue<BattleExchange> queue;
+
+    public RequestHandler(SynchronousQueue<BattleExchange> queue) {
+        this.queue = queue;
+    }
 
     public Response handleRequest(HttpRequest req) throws SQLException {
 
         if (req.getToken() != null) {
-            if (SessionDaoImpl.getInstance().getSession(req.getToken()) == "") {
+            if (SessionDao.getInstance().getSession(req.getToken()) == "") {
                 return new Response(401, "");
             }
         }
 
         DirectiveHandler dirHandler = new DirectiveHandler();
-        directiveDAOHandler = dirHandler.getDirectiveObject(req.getDirective(), req.getToken());
+        directiveDAOHandler = dirHandler.getDirectiveObject(req.getDirective(), req.getToken(), queue);
         Response response = chooseDirective(req);
         return response;
     }

@@ -1,8 +1,6 @@
-package com.mtcg.repository.TradingMediator;
+package com.mtcg.repository.trading;
 
 import com.mtcg.database.DBConnection;
-import com.mtcg.repository.credentials.Credentials;
-import com.mtcg.repository.session.SessionDaoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

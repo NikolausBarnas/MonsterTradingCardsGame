@@ -1,10 +1,13 @@
 package com.mtcg.repository.directive;
 
+import com.mtcg.repository.game.BattleExchange;
+
 import java.util.Objects;
+import java.util.concurrent.SynchronousQueue;
 
 public class DirectiveHandler {
 
-    public DirectiveDAOHandler getDirectiveObject(String directive, String token) {
+    public DirectiveDAOHandler getDirectiveObject(String directive, String token, SynchronousQueue<BattleExchange> queue) {
         directive = directive.substring(1);
         String addDir = "";
         String[] dirArray;
@@ -26,6 +29,7 @@ public class DirectiveHandler {
             case "stats": return new StatsHandler(token);
             case "score": return new ScoreboardHandler(token);
             case "tradings": return new TradeHandler(token, addDir);
+            case "battles": return new BattleHandler(token, queue);
             default:
                 System.out.println("DIRECTIVE NOT YET IMPLEMENTED");
                 break;

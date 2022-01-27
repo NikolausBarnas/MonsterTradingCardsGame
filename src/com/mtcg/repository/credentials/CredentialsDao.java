@@ -9,20 +9,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class CredentialsDaoImpl {
+public class CredentialsDao {
     private Connection connection;
     private PreparedStatement preparedStatement;
-    private static CredentialsDaoImpl instance = null;
+    private static CredentialsDao instance = null;
 
     static {
-        CredentialsDaoImpl.instance = new CredentialsDaoImpl();
+        CredentialsDao.instance = new CredentialsDao();
     }
 
-    private CredentialsDaoImpl() {
+    private CredentialsDao() {
         connection = DBConnection.getInstance().getConnection();
     }
 
-    public static CredentialsDaoImpl getInstance() {
+    public static CredentialsDao getInstance() {
         return instance;
     }
 

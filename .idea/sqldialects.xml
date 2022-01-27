@@ -2,11 +2,11 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/com/mtcg/Main.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/TradingMediator/TradeDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/card/CardDao.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/credentials/CredentialsDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/credentials/CredentialsDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/packages/PackageDao.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/session/SessionDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/session/SessionDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/trading/TradeDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/mtcg/repository/user/UserDao.java" dialect="GenericSQL" />
   </component>
 </project>

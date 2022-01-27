@@ -11,6 +11,7 @@ import com.mtcg.server.Response;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CardHandler implements DirectiveDAOHandler {
 
@@ -30,6 +31,10 @@ public class CardHandler implements DirectiveDAOHandler {
 
     @Override
     public Response handlePost(String body) {
+
+        if (!Objects.equals(token, "admin"))
+            return new Response(401,"");
+
         CardMediator[] cardMediators = gson.fromJson(body, CardMediator[].class);
         for (CardMediator c: cardMediators)
             cardPackage.add(c.cardObjectHandler());

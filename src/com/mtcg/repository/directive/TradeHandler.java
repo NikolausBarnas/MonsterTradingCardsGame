@@ -1,19 +1,13 @@
 package com.mtcg.repository.directive;
 
 import com.google.gson.Gson;
-import com.mtcg.hashing.Hash;
-import com.mtcg.repository.TradingMediator.TradeDao;
-import com.mtcg.repository.TradingMediator.TradingMediator;
+import com.mtcg.repository.trading.TradeDao;
+import com.mtcg.repository.trading.TradingMediator;
 import com.mtcg.repository.card.CardDao;
 import com.mtcg.repository.card.CardMediator;
-import com.mtcg.repository.credentials.Credentials;
-import com.mtcg.repository.credentials.CredentialsDaoImpl;
 import com.mtcg.repository.transaction.TransactionDao;
-import com.mtcg.repository.user.UserDao;
-import com.mtcg.repository.user.UserMediator;
 import com.mtcg.server.Response;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 

@@ -1380,8 +1380,8 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <IntrospectionStateNumber>2445</IntrospectionStateNumber>
-      <StartupTime>1643105131</StartupTime>
+      <IntrospectionStateNumber>2464</IntrospectionStateNumber>
+      <StartupTime>1643183754</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13757</ObjectId>
@@ -1411,7 +1411,7 @@ false posixrules
 13391||-9223372036854775808|U|G
 13391||10|U|G</Grants>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>2446</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2465</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|40972|32782|7
 </Relations>
@@ -1487,7 +1487,7 @@ false posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>527</StateNumber>
       <Owner>swe1user</Owner>
-      <IntrospectionStateNumber>2446</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2465</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="21" parent="3" name="plpgsql">
@@ -1621,7 +1621,7 @@ false posixrules
     <table id="38" parent="20" name="users">
       <ObjectId>16395</ObjectId>
       <Owner>swe1user</Owner>
-      <StateNumber>2428</StateNumber>
+      <StateNumber>2458</StateNumber>
       <AccessMethodId>2</AccessMethodId>
     </table>
     <column id="39" parent="34" name="id">
@@ -1907,7 +1907,15 @@ false posixrules
       <DefaultExpression>&apos;defaultName&apos;::character varying</DefaultExpression>
       <TypeId>1043</TypeId>
     </column>
-    <index id="76" parent="38" name="users_username_uindex">
+    <column id="76" parent="38" name="gamecount">
+      <Position>8</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2462</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="77" parent="38" name="users_username_uindex">
       <ObjectId>16401</ObjectId>
       <StateNumber>837</StateNumber>
       <ColNames>username</ColNames>

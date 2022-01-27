@@ -2,9 +2,8 @@ package com.mtcg.repository.directive;
 
 import com.google.gson.Gson;
 import com.mtcg.hashing.Hash;
-import com.mtcg.repository.card.CardMediator;
 import com.mtcg.repository.credentials.Credentials;
-import com.mtcg.repository.credentials.CredentialsDaoImpl;
+import com.mtcg.repository.credentials.CredentialsDao;
 import com.mtcg.repository.user.UserDao;
 import com.mtcg.repository.user.UserMediator;
 import com.mtcg.server.Response;
@@ -14,13 +13,13 @@ import java.util.Objects;
 
 public class UserHandler implements DirectiveDAOHandler {
     private Gson gson = null;
-    private CredentialsDaoImpl credentialsDao = null;
+    private CredentialsDao credentialsDao = null;
     private String token;
     private String addDir;
 
     public UserHandler(String token, String addDir) {
         this.gson = new Gson();
-        this.credentialsDao = CredentialsDaoImpl.getInstance();
+        this.credentialsDao = CredentialsDao.getInstance();
         this.token = token;
         this.addDir = addDir;
     }

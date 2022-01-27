@@ -36,6 +36,7 @@ public class TransactionHandler implements DirectiveDAOHandler {
     @Override
     public Response handlePost(String body) throws SQLException {
         int coins = 0;
+
         if ((coins = userDao.getCoins(token)) < 5)
             return new Response(409, "");
 

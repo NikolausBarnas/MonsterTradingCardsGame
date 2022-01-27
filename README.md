@@ -1,6 +1,6 @@
 # MonsterTradingCardsGame: Protocol
 
-### Preface
+## Preface
 
 MonsterTradingCardsGame or MTCG, which is how it will be referred to in
 this Protocol, is a Project where players can get together, gather cards,
@@ -8,7 +8,7 @@ battle for glory and a high ranking on the official scoreboard. As of
 right now, only the backend and server logic are implemented successfully.
 
 
-### Design
+## Design
 
 In terms of architecture, MTCG was originally designed to be as 
 understandable, flexible and maintainable as possible, but as the
@@ -44,7 +44,7 @@ Lastly, the database package is responsible for establishing a database
 connection and is constructed to be able to be easily extended for further
 requirements. 
 
-### Failures
+## Failures
 
 The initial design of a dynamic repository pattern was lacking in
 foresight, and finally ended up being unsuccessful. Several DAO interfaces
@@ -57,12 +57,26 @@ will definitely be necessary in the future, I am still of the opinion
 that the implemented features are S.O.L.I.D. enough to be extended
 quite easily. 
 
-### Selected Solutions
+## Selected Solutions
 
+In terms of solutions, there is no one right answer. A variability of 
+multiple problem-solving approaches and a definite hierarchy were 
+absolutely vital. The S.O.L.I.D. principles were my guidance throughout
+this project, although my inexperience certainly played a part in
+leading to some failures which were already mentioned in the
+section above. One specific pattern will stand out within
+the project, the singleton pattern, which is ideal for 
+making use of not having to instantiate new objects if there is no
+need to do so. 
 
+## The reasoning behind Unit Tests
 
-### The reasoning behind Unit Tests
+Unit tests should always be well constructed and useful,
+which is why I decided to test even the simplest features
+of the project. All unit tests are testing for one or 
+several specific features/methods at different stages
+of the program.
 
-### Link to Github
+## Link to Github
 
 https://github.com/NikolausBarnas/MonsterTradingCardsGame

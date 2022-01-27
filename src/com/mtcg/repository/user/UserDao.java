@@ -1,18 +1,13 @@
 package com.mtcg.repository.user;
 
 import com.mtcg.database.DBConnection;
-import com.mtcg.repository.card.CardMediator;
-import com.mtcg.repository.credentials.Credentials;
-import com.mtcg.repository.credentials.CredentialsDaoImpl;
 import com.mtcg.repository.scoreboard.ScoreboardEntry;
-import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class UserDao {
     private Connection connection;
@@ -23,6 +18,8 @@ public class UserDao {
     PreparedStatement updateUserData = null;
     PreparedStatement getElo = null;
     PreparedStatement getScoreboard = null;
+    PreparedStatement updateElo = null;
+    PreparedStatement updateGameCount = null;
 
     static {
         UserDao.instance = new UserDao();
@@ -160,7 +157,7 @@ public class UserDao {
         if (getScoreboard == null) {
             try {
                 getScoreboard = connection.prepareStatement("""
-                    SELECT username,elo
+                    SELECT username,elo,gamecount
                     FROM users
                     ORDER BY elo
                     DESC
@@ -173,7 +170,7 @@ public class UserDao {
             ResultSet resultSet = getScoreboard.executeQuery();
             while (resultSet.next()) {
                 scoreboardEntries.add(new ScoreboardEntry(rank, resultSet.getString("username"),
-                        resultSet.getInt("elo")));
+                        resultSet.getInt("elo"),resultSet.getInt("gamecount")));
                 rank++;
             }
             if (!scoreboardEntries.isEmpty())
@@ -182,6 +179,49 @@ public class UserDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int updateElo(String username, int elo) {
+        if (updateElo == null) {
+            try {
+                updateElo = connection.prepareStatement("""
+                UPDATE users
+                SET elo = ?
+                WHERE username = ?
+                """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            updateElo.setInt(1, elo);
+            updateElo.setString(2, username);
+            return updateElo.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int updateGameCount(String username) {
+        if (updateGameCount == null) {
+            try {
+                updateGameCount = connection.prepareStatement("""
+                UPDATE users
+                SET gamecount = gamecount+1
+                WHERE username = ?
+                """);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            updateGameCount.setString(1, username);
+            return updateGameCount.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
 }

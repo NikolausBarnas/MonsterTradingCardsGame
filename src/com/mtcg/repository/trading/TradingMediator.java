@@ -1,4 +1,4 @@
-package com.mtcg.repository.TradingMediator;
+package com.mtcg.repository.trading;
 
 import com.google.gson.annotations.SerializedName;
 

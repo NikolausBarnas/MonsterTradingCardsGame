@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mtcg.hashing.Hash;
 import com.mtcg.repository.credentials.Credentials;
-import com.mtcg.repository.credentials.CredentialsDaoImpl;
-import com.mtcg.repository.session.SessionDaoImpl;
+import com.mtcg.repository.credentials.CredentialsDao;
+import com.mtcg.repository.session.SessionDao;
 import com.mtcg.server.Response;
 
 import java.sql.SQLException;
@@ -14,14 +14,14 @@ import java.util.Objects;
 public class SessionHandler implements DirectiveDAOHandler{
 
     private Gson gson = null;
-    private CredentialsDaoImpl credentialsDao = null;
+    private CredentialsDao credentialsDao = null;
     private Credentials credentials = null;
-    private SessionDaoImpl sessionDao = null;
+    private SessionDao sessionDao = null;
 
     public SessionHandler() {
         this.gson = new Gson();
-        this.credentialsDao = CredentialsDaoImpl.getInstance();
-        this.sessionDao = SessionDaoImpl.getInstance();
+        this.credentialsDao = CredentialsDao.getInstance();
+        this.sessionDao = SessionDao.getInstance();
     }
 
     @Override
